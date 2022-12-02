@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="result" id="result">0</div>
+            <div id="1" onclick="addNumber(this.id)">1</div>
+            <div id="2" onclick="addNumber(this.id)">2</div>
+            <div id="3" onclick="addNumber(this.id)">3</div>
+            <div id="+" class="symbol" onclick="addOperator(this.id)">+</div>
+            <div id="4" onclick="addNumber(this.id)">4</div>
+            <div id="5" onclick="addNumber(this.id)">5</div>
+            <div id="6" onclick="addNumber(this.id)">6</div>
+            <div id="-" class="symbol" onclick="addOperator(this.id)">-</div>
+            <div id="7" onclick="addNumber(this.id)">7</div>
+            <div id="8" onclick="addNumber(this.id)">8</div>
+            <div id="9" onclick="addNumber(this.id)">9</div>
+            <div id="/" class="symbol" onclick="addOperator(this.id)">/</div>
+            <div id="c" class="symbol" onclick="reset()">c</div>
+            <div id="0" onclick="addNumber(this.id)">0</div>
+            <div id="." onclick="addNumber(this.id)">.</div>
+            <div id="*" class="symbol" onclick="addOperator(this.id)">*</div>
+            <div class="button symbol" id="=" onclick="calculateResult()">=</div>
+        </div>
+    </div>
+</body>
+
+<script>
+    var result = document.getElementById('result');
+    function addNumber(id) {
+        var doc = document.getElementById(id);
+        if (result.innerHTML == '0') {
+            if (doc.innerHTML == '.') {
+                result.innerHTML += doc.innerHTML;
+            }
+            else {
+                result.innerHTML = doc.innerHTML;
+            }
+        } else {
+            result.innerHTML += doc.innerHTML;
+        }
+    }
+
+    function addOperator(id) {
+        var doc = document.getElementById(id);
+        var lastChar = result.innerHTML.charAt(result.innerHTML.length - 1);
+        console.log(lastChar);
+        switch (lastChar) {
+            case doc.innerHTML:
+                break;
+            case '*':
+                result.innerHTML = result.innerHTML.slice(0, -1) + doc.innerHTML;
+                break;
+            case '-':
+                result.innerHTML = result.innerHTML.slice(0, -1) + doc.innerHTML;
+                break;
+            case '+':
+                result.innerHTML = result.innerHTML.slice(0, -1) + doc.innerHTML;
+                break;
+            case '/':
+                result.innerHTML = result.innerHTML.slice(0, -1) + doc.innerHTML;
+                break;
+            default:
+                switch (doc.innerHTML) {
+                    case '*':
+                        result.innerHTML += '*';
+                        break;
+                    case '+':
+                        result.innerHTML += '+';
+                        break;
+                    case '-':
+                        result.innerHTML += '-';
+                        break;
+                    case '/':
+                        result.innerHTML += '/';
+                        break
+                    default:
+                        break;
+                }
+        }
+    }
+
+    function calculateResult() {
+        console.log(result.innerHTML);
+        result.innerHTML = eval(result.innerHTML);
+    }
+
+    function reset() {
+        result.innerHTML = 0;
+    }
+</script>
+
+</html>
